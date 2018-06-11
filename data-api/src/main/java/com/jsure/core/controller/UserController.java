@@ -59,6 +59,30 @@ public class UserController extends BaseController {
     }
 
     /**
+     * 查询用户列表
+     * @return
+     */
+    @ApiOperation(value = "查询用户列表", notes = "查询用户列表,含分页排序")
+    @RequestMapping(value = "/userList", method = RequestMethod.GET)
+    public Response<List<TUserResult>> findUserList() {
+        Response<List<TUserResult>> result = new Response<>();
+        try {
+            UserParam user = new UserParam();
+            List<TUserResult> users = userService.findUserList(user);
+            result.setResult(users);
+            successResult(result, CustomConstant.USER_INFO_SUCCESS);
+            log.info("success to findUserList, RESULT:{}", result);
+        } catch (CustomException e) {
+            failedResult(result, e.getCode(), e.getMessage());
+            log.error("failed to findUserList, RESULT:{},cause:{}", result, e);
+        } catch (Exception e) {
+            failedResult(result);
+            log.error("failed to findUserList, RESULT:{},cause:{}", result, e);
+        }
+        return result;
+    }
+
+    /**
      * 创建用户
      *
      * @param user
