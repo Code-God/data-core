@@ -19,7 +19,7 @@ eureka:
         context-path: ${management.context-path}
   client:
     service-url:
-      defaultZone: http://${security-user.name}:${security-user.password}@localhost:8085/eureka/,http://${security-user.name}:${security-user.password}@localhost:8086/eureka/
+      defaultZone: http://${security-user.name}:${security-user.password}@localhost:8085/eureka/  #http://${security-user.name}:${security-user.password}@localhost:8086/eureka/
 management:
   security:
     enabled: false
